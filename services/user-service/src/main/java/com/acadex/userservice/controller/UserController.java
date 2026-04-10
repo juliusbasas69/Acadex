@@ -11,6 +11,6 @@ public class UserController {
 	@GetMapping("/test")
 	public String showTest() {
 		
-		return "TEST PAGE";
+		return "TEST PAGE AGAIn";
 	}
 }
