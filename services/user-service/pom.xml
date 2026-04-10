@@ -30,45 +30,92 @@
 		<java.version>21</java.version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-kafka</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc</artifactId>
-		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-registry-prometheus</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-kafka-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+	    <!-- ========================= -->
+	    <!-- SPRING BOOT CORE MONITORING -->
+	    <!-- ========================= -->
+	
+	    <!-- Actuator: exposes health, metrics, and application info endpoints -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-actuator</artifactId>
+	    </dependency>
+	
+	    <!-- Micrometer Prometheus: exposes metrics for Prometheus monitoring -->
+	    <dependency>
+	        <groupId>io.micrometer</groupId>
+	        <artifactId>micrometer-registry-prometheus</artifactId>
+	        <scope>runtime</scope>
+	    </dependency>
+	
+	    <!-- ========================= -->
+	    <!-- MESSAGE STREAMING (EVENT-DRIVEN ARCHITECTURE) -->
+	    <!-- ========================= -->
+	
+	    <!-- Kafka: enables event-driven communication (producer/consumer) -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-kafka</artifactId>
+	    </dependency>
+	
+	    <!-- Kafka Test: testing Kafka producers/consumers -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-kafka-test</artifactId>
+	        <scope>test</scope>
+	    </dependency>
+	
+	    <!-- ========================= -->
+	    <!-- WEB / REST API LAYER -->
+	    <!-- ========================= -->
+	
+	    <!-- Spring Web MVC: builds REST APIs and web applications -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-webmvc</artifactId>
+	    </dependency>
+	
+	    <!-- Web MVC Test: testing controllers and REST endpoints -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-webmvc-test</artifactId>
+	        <scope>test</scope>
+	    </dependency>
+	
+	    <!-- ========================= -->
+	    <!-- API DOCUMENTATION -->
+	    <!-- ========================= -->
+	
+	    <!-- Swagger / OpenAPI UI: auto-generates API documentation UI -->
+	    <dependency>
+	        <groupId>org.springdoc</groupId>
+	        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+	        <version>2.5.0</version>
+	    </dependency>
+	
+	    <!-- ========================= -->
+	    <!-- DEVELOPMENT TOOLS -->
+	    <!-- ========================= -->
+	
+	    <!-- DevTools: auto-restart app during development for faster iteration -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-devtools</artifactId>
+	        <scope>runtime</scope>
+	        <optional>true</optional>
+	    </dependency>
+	
+	    <!-- ========================= -->
+	    <!-- TESTING / QUALITY -->
+	    <!-- ========================= -->
+	
+	    <!-- Actuator Test: testing health and metrics endpoints -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-actuator-test</artifactId>
+	        <scope>test</scope>
+	    </dependency>
+	
 	</dependencies>
 
 	<build>
