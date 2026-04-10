@@ -1,0 +1,70 @@
+services:
+  kafka:
+      image: apache/kafka:4.2.0   # Use Kafka image (message broker)
+      container_name: kafka       # Name of the container
+      ports:
+        - "9092:9092"             # Expose Kafka on port 9092 (so your apps can connect)
+
+      environment:
+          - KAFKA_NODE_ID=1       # Unique ID of this Kafka node
+          - KAFKA_PROCESS_ROLES=broker,controller  
+          # Kafka acts as BOTH broker (handles messages) and controller (manages cluster)
+
+          - KAFKA_CONTROLLER_QUORUM_VOTERS=1@kafka:9093  
+          # Tells Kafka how to find the controller
+
+          - KAFKA_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093  
+          # Ports Kafka listens to internally
+
+          - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092  
+          # What your applications use to connect (IMPORTANT)
+
+          - KAFKA_CONTROLLER_LISTENER_NAMES=CONTROLLER  
+          # Which listener is used for controller communication
+
+          - KAFKA_LOG_DIRS=/tmp/kraft-combined-logs  
+          # Where Kafka stores messages
+
+          - KAFKA_CLUSTER_ID=5L6g3nShT-eMCtK--X86sw  
+          # Unique ID of your Kafka cluster
+
+          - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1  
+          # Number of copies for offset data (1 because single node)
+
+          - KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=1  
+          # Transaction log replication (1 for single node)
+
+          - KAFKA_TRANSACTION_STATE_LOG_MIN_ISR=1  
+          # Minimum in-sync replicas (1 for single node)
+
+  kafka-exporter:
+    image: danielqsj/kafka-exporter   # Tool to expose Kafka metrics to Prometheus
+    ports:
+      - "9308:9308"                   # Exposes metrics on port 9308
+
+    command:
+      - "--kafka.server=kafka:9092"   # Connects to Kafka container using its service name
+
+  prometheus:
+    image: prom/prometheus           # Prometheus (metrics collector)
+    container_name: prometheus
+    ports:
+      - "9090:9090"                  # Access Prometheus UI on localhost:9090
+
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml  
+      # Uses your custom config file to know what to monitor
+
+  grafana:
+    image: grafana/grafana           # Grafana (visualization tool)
+    container_name: grafana
+    ports:
+      - "3000:3000"                  # Grafana UI on localhost:3000
+
+    volumes:
+      - grafana-storage:/var/lib/grafana  
+      # Saves dashboards, settings, and data permanently
+
+volumes:
+  grafana-storage:  
+  # Creates storage so Grafana does NOT lose data when container restarts

@@ -1,0 +1,29 @@
+global:
+  scrape_interval: 5s  
+  # Prometheus will check (scrape) metrics every 5 seconds
+
+scrape_configs:
+
+  - job_name: 'spring-boot-services'  
+    # Group name for your Spring Boot apps
+
+    metrics_path: '/actuator/prometheus'  
+    # Endpoint where Spring Boot exposes metrics
+
+    static_configs:
+      - targets: 
+          - 'host.docker.internal:8080'  
+          # User Service (runs on port 8080)
+
+          - 'host.docker.internal:8081'  
+          # Another service (example: Role Service)
+
+          - 'host.docker.internal:8085'  
+          # Another service (example: API Gateway)
+
+  - job_name: 'kafka'  
+    # Group name for Kafka monitoring
+
+    static_configs:
+      - targets: ['kafka-exporter:9308']  
+      # Kafka exporter container exposes Kafka metrics here
