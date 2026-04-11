@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 
@@ -77,9 +78,12 @@ export default function Login() {
           </button>
           <div className="mt-6 text-center text-sm text-gray-500">
             Don’t have an account?{" "}
-            <span className="text-green-600 font-medium">
-              Please contact your professor
-            </span>
+            <Link
+              href="/register"
+              className="text-green-600 font-medium cursor-pointer"
+            >
+              Register here
+            </Link>
           </div>
         </form>
       </div>
