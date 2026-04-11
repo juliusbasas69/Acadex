@@ -126,7 +126,7 @@ export default function Sidebar() {
                     )}
 
                     <Icon size={18} />
-                    <span>{item.name}</span>
+                    <span className="text-sm">{item.name}</span>
                   </div>
                 );
               })}

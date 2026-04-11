@@ -1,12 +1,11 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { ChevronRight, LayoutDashboard } from "lucide-react";
+import { ChevronRight, LayoutDashboard, Info } from "lucide-react";
 
 export default function Breadcrumb() {
   const pathname = usePathname();
 
-  // convert "/users/create" → ["users", "create"]
   const segments = pathname.split("/").filter(Boolean);
 
   const formatLabel = (text: string) => {
@@ -14,9 +13,9 @@ export default function Breadcrumb() {
   };
 
   return (
-    <div className="w-full bg-white border-b border-gray-200 px-6 py-2">
+    <div className="w-full bg-white border-b border-gray-200 px-6 py-2 flex items-center justify-between">
+      {/* LEFT - BREADCRUMB */}
       <div className="flex items-center text-sm text-gray-600">
-        {/* DASHBOARD */}
         <div className="flex items-center gap-1 hover:text-gray-900 cursor-pointer">
           <LayoutDashboard size={14} />
           <span>Dashboard</span>
@@ -41,6 +40,14 @@ export default function Breadcrumb() {
             </div>
           );
         })}
+      </div>
+
+      {/* RIGHT - ANNOUNCEMENT */}
+      <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-medium">
+          <Info size={14} />
+          <span>System in development phase</span>
+        </div>
       </div>
     </div>
   );
